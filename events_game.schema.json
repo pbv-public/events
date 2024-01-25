@@ -1,0 +1,26 @@
+{
+  "$id": "/events/game",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Describes events that occurred during a game, organized into rallies.",
+  "properties": {
+    "rallies": {
+      "description": "An ordered list of the rallies within the game.",
+      "items": {
+        "$ref": "/events/rally",
+        "title": "Rally"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "version": {
+      "const": "0.0.1"
+    }
+  },
+  "required": [
+    "version",
+    "rallies"
+  ],
+  "title": "Game Events",
+  "type": "object"
+}

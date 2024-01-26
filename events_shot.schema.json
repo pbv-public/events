@@ -4,14 +4,14 @@
   "additionalProperties": false,
   "description": "Describes a ball hit by a player's paddle.",
   "properties": {
-    "angle": {
-      "description": "The angle at which the ball was hit.",
-      "type": "number"
-    },
     "ball": {
       "additionalProperties": false,
-      "description": "stats related to how the ball moves as a result of being hit",
+      "description": "stats related to how the ball moves as a result of being hit (omitted if we couldn't track the ball after the shot was made)",
       "properties": {
+        "angle": {
+          "description": "The angle at which the ball was hit.",
+          "type": "number"
+        },
         "crossed_net": {
           "description": "`true` if the ball crosses the net, else `false`.",
           "type": "boolean"
@@ -31,6 +31,22 @@
           ],
           "type": "string"
         },
+        "distance": {
+          "description": "The distance the ball traveled (feet) before coming in contact with the net, court, paddle, etc.",
+          "type": "number"
+        },
+        "end_zone": {
+          "description": "Zone the ball bounced in or was next hit from (whichever happens first)",
+          "enum": [
+            "deep",
+            "mid",
+            "short",
+            "kitchen",
+            "net",
+            "out"
+          ],
+          "type": "string"
+        },
         "height_over_net": {
           "description": "Height the ball was over the net when it crossed.",
           "type": "number"
@@ -42,13 +58,12 @@
         "speed": {
           "description": "Speed of the ball in MPH.",
           "type": "number"
-        },
-        "spin": {
-          "description": "The spin of the ball in RPM.",
-          "type": "number"
         }
       },
       "required": [
+        "end_zone",
+        "angle",
+        "distance",
         "speed",
         "max_height",
         "height_over_net",
@@ -57,20 +72,6 @@
       ],
       "title": "Ball",
       "type": "object"
-    },
-    "distance": {
-      "description": "The distance the ball traveled (feet) before coming in contact with the net, court, paddle, etc.",
-      "type": "number"
-    },
-    "hit_zone": {
-      "description": "Zone the ball was hit from.",
-      "enum": [
-        "deep",
-        "mid",
-        "short",
-        "kitchen"
-      ],
-      "type": "string"
     },
     "is_volley": {
       "description": "whether this shot was a volley hit out of the air or not; omitted if we don't know",
@@ -81,15 +82,13 @@
       "description": "the player who hit the ball",
       "title": "Player ID"
     },
-    "target_zone": {
-      "description": "Zone the ball landed in or was hit from (whichever happens first)",
+    "start_zone": {
+      "description": "Zone the ball was hit from.",
       "enum": [
         "deep",
         "mid",
         "short",
-        "kitchen",
-        "net",
-        "out"
+        "kitchen"
       ],
       "type": "string"
     },
@@ -104,11 +103,7 @@
   },
   "required": [
     "player_id",
-    "ball",
-    "hit_zone",
-    "target_zone",
-    "angle",
-    "distance"
+    "start_zone"
   ],
   "title": "Shot",
   "type": "object"

@@ -36,16 +36,9 @@
           "type": "number"
         },
         "end_zone": {
+          "$ref": "/events/ball_area",
           "description": "Zone the ball bounced in or was next hit from (whichever happens first)",
-          "enum": [
-            "deep",
-            "mid",
-            "short",
-            "kitchen",
-            "net",
-            "out"
-          ],
-          "type": "string"
+          "title": "Ball Area"
         },
         "height_over_net": {
           "description": "Height the ball was over the net when it crossed.",
@@ -83,14 +76,9 @@
       "title": "Player ID"
     },
     "start_zone": {
+      "$ref": "/events/ball_area",
       "description": "Zone the ball was hit from.",
-      "enum": [
-        "deep",
-        "mid",
-        "short",
-        "kitchen"
-      ],
-      "type": "string"
+      "title": "Ball Area"
     },
     "type": {
       "enum": [

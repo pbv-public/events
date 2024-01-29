@@ -17,10 +17,10 @@
             "additionalProperties": false,
             "description": "Describes where the ball is and what, if anything, is happening to it. Omitted if we don't know where the ball is.",
             "properties": {
-              "bounce_area": {
-                "$ref": "/events/bounce",
+              "ball_area": {
+                "$ref": "/events/ball_area",
                 "description": "Describes the area that the ball touched:\n* deep - the ball landed in the deep zone (ball landed between 39 and 44 feet deep in the court)\n* mid - the ball landed in the mid zone (ball landed between 34 and 39 feet deep in the court)\n* short - the ball landed in the short zone (ball landed between 29 and 34 feet deep in the court)\n* kitchen - the ball landed in the kitchen zone (ball landed between 22 and 29 feet deep in the court)\n* net - the ball hit the net\n* out - the ball landed out of bounds",
-                "title": "Bounce"
+                "title": "Ball Area"
               },
               "confidence": {
                 "$ref": "/types/confidence",
@@ -40,7 +40,8 @@
             },
             "required": [
               "position",
-              "confidence"
+              "confidence",
+              "ball_area"
             ],
             "type": "object"
           },

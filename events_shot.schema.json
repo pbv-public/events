@@ -4,13 +4,38 @@
   "additionalProperties": false,
   "description": "Describes a ball hit by a player's paddle.",
   "properties": {
-    "ball": {
+    "is_volley": {
+      "description": "whether this shot was a volley hit out of the air or not; omitted if we don't know",
+      "type": "boolean"
+    },
+    "player_id": {
+      "$ref": "/types/player_id",
+      "description": "the player who hit the ball",
+      "title": "Player ID"
+    },
+    "resulting_ball_movement": {
       "additionalProperties": false,
       "description": "stats related to how the ball moves as a result of being hit (omitted if we couldn't track the ball after the shot was made)",
       "properties": {
-        "angle": {
-          "description": "The angle at which the ball was hit.",
-          "type": "number"
+        "angles": {
+          "additionalProperties": false,
+          "properties": {
+            "pitch": {
+              "$ref": "/types/angle",
+              "description": "The angle (in degrees) at which the ball was hit along the z plane (up/down).",
+              "title": "Angle"
+            },
+            "yaw": {
+              "$ref": "/types/angle",
+              "description": "The angle (in degrees) at which the ball was hit in the xy plane (left/right).",
+              "title": "Angle"
+            }
+          },
+          "required": [
+            "yaw",
+            "pitch"
+          ],
+          "type": "object"
         },
         "crossed_net": {
           "description": "`true` if the ball crosses the net, else `false`.",
@@ -36,9 +61,9 @@
           "type": "number"
         },
         "end_zone": {
-          "$ref": "/events/ball_area",
+          "$ref": "/events/zone",
           "description": "Zone the ball bounced in or was next hit from (whichever happens first)",
-          "title": "Ball Area"
+          "title": "Zone"
         },
         "height_over_net": {
           "description": "Height the ball was over the net when it crossed.",
@@ -55,7 +80,7 @@
       },
       "required": [
         "end_zone",
-        "angle",
+        "angles",
         "distance",
         "speed",
         "max_height",
@@ -63,22 +88,13 @@
         "direction",
         "crossed_net"
       ],
-      "title": "Ball",
+      "title": "Resulting Ball Movement",
       "type": "object"
     },
-    "is_volley": {
-      "description": "whether this shot was a volley hit out of the air or not; omitted if we don't know",
-      "type": "boolean"
-    },
-    "player_id": {
-      "$ref": "/types/player_id",
-      "description": "the player who hit the ball",
-      "title": "Player ID"
-    },
     "start_zone": {
-      "$ref": "/events/ball_area",
-      "description": "Zone the ball was hit from.",
-      "title": "Ball Area"
+      "$ref": "/events/zone",
+      "description": "where the ball was hit from",
+      "title": "Zone"
     },
     "type": {
       "enum": [

@@ -7,81 +7,12 @@
       "description": "The end time of the rally (milliseconds).",
       "type": "integer"
     },
-    "frames": {
-      "description": "The sequence of video frames during this rally in which something is happening (e.g., the ball is hit or bounces, or a player arrives/departs from the kitchen).",
+    "moments": {
+      "description": "The sequence of moments during this rally in which events occurred (e.g., the ball is hit or bounces, or a player arrives/departs from the kitchen).",
       "items": {
-        "additionalProperties": false,
-        "description": "Describes a particular moment in the video (i.e., one video frame) when event(s) were occurring.",
-        "properties": {
-          "ball": {
-            "additionalProperties": false,
-            "description": "Describes where the ball is and what, if anything, is happening to it. Omitted if we don't know where the ball is.",
-            "properties": {
-              "ball_area": {
-                "$ref": "/events/ball_area",
-                "description": "Describes the area that the ball touched:\n* deep - the ball landed in the deep zone (ball landed between 39 and 44 feet deep in the court)\n* mid - the ball landed in the mid zone (ball landed between 34 and 39 feet deep in the court)\n* short - the ball landed in the short zone (ball landed between 29 and 34 feet deep in the court)\n* kitchen - the ball landed in the kitchen zone (ball landed between 22 and 29 feet deep in the court)\n* net - the ball hit the net\n* out - the ball landed out of bounds",
-                "title": "Ball Area"
-              },
-              "confidence": {
-                "$ref": "/types/confidence",
-                "description": "the confidence we have in this ball data",
-                "title": "Prediction Confidence"
-              },
-              "position": {
-                "$ref": "/types/world_position/3d",
-                "description": "a position in feet relative to the far left court corner",
-                "title": "World XYZ"
-              },
-              "shot": {
-                "$ref": "/events/shot",
-                "description": "Describes a ball hit by a player's paddle.",
-                "title": "Shot"
-              }
-            },
-            "required": [
-              "position",
-              "confidence",
-              "ball_area"
-            ],
-            "type": "object"
-          },
-          "kitchen_changes": {
-            "additionalProperties": false,
-            "description": "Reports which players (if any) arrived or departed from the kitchen at this time.\n\n* The key is /types/player_id.\n* The value is one of `\"arrived\"` or `\"departed\"`. Players which neither\narrived nor departed at this time are omitted.",
-            "patternProperties": {
-              "^0|1|2|3$": {
-                "enum": [
-                  "arrived",
-                  "departed"
-                ],
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "ms": {
-            "description": "when in the video this video frame occurred (in milliseconds)",
-            "type": "integer"
-          },
-          "player_positions": {
-            "description": "each player's position on the court",
-            "items": {
-              "$ref": "/types/world_position/2d",
-              "description": "a position in feet relative to the far left court corner",
-              "title": "World XY"
-            },
-            "maxItems": 4,
-            "minItems": 4,
-            "type": "array"
-          }
-        },
-        "required": [
-          "ms",
-          "player_positions",
-          "kitchen_changes"
-        ],
-        "title": "Frame",
-        "type": "object"
+        "$ref": "/events/moment",
+        "description": "Describes a particular moment in the video when event(s) occurred. This may not be aligned with exactly when a video frame occurred (e.g., it could be _in between_ video frames).",
+        "title": "Moment"
       },
       "type": "array"
     },
@@ -125,7 +56,7 @@
     "start_ms",
     "end_ms",
     "players",
-    "frames"
+    "moments"
   ],
   "title": "Rally",
   "type": "object"

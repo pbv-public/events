@@ -1,0 +1,11 @@
+{
+  "$id": "/events/kitchen_change",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "indicates whether a player arrived at or left the kitchen line",
+  "enum": [
+    "arrived",
+    "departed"
+  ],
+  "title": "Kitchen Change Type",
+  "type": "string"
+}

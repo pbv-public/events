@@ -14,7 +14,7 @@
       "type": "array"
     },
     "version": {
-      "const": "0.0.4"
+      "const": "0.0.5-preview"
     }
   },
   "required": [

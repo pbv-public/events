@@ -47,28 +47,16 @@
       ],
       "type": "object"
     },
-    "kitchen_changes": {
-      "additionalProperties": false,
-      "description": "Reports which players (if any) arrived or departed from the kitchen at this time.\n\n* The key is /types/player_id.\n* The value is one of `\"arrived\"` or `\"departed\"`. Players which neither\narrived nor departed at this time are omitted.",
-      "patternProperties": {
-        "^0|1|2|3$": {
-          "$ref": "/events/kitchen_change",
-          "description": "indicates whether a player arrived at or left the kitchen line",
-          "title": "Kitchen Change Type"
-        }
-      },
-      "type": "object"
-    },
     "ms": {
       "description": "when in the video this moment occurred (in milliseconds)",
       "type": "integer"
     },
-    "player_positions": {
-      "description": "each player's position on the court",
+    "players": {
+      "description": "describes where the players are and any events related to them",
       "items": {
-        "$ref": "/types/world_position/2d",
-        "description": "a position in feet relative to the far left court corner",
-        "title": "World XY"
+        "$ref": "/events/player",
+        "description": "describes where a player is and any events related to them at a particular moment",
+        "title": "Player Snapshot"
       },
       "maxItems": 4,
       "minItems": 4,
@@ -77,8 +65,7 @@
   },
   "required": [
     "ms",
-    "player_positions",
-    "kitchen_changes"
+    "players"
   ],
   "title": "Moment",
   "type": "object"

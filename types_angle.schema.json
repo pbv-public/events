@@ -1,9 +1,0 @@
-{
-  "$id": "/types/angle",
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "some angle in degrees",
-  "maximum": 360,
-  "minimum": 0,
-  "title": "Angle",
-  "type": "number"
-}

@@ -1,5 +1,36 @@
 # Events Schema Changelog
 
+## [v0.0.5](https://github.com/pbv-public/events/releases/tag/v0.0.5) on 2024-Feb-15
+> * [Compare to Previous Version](https://github.com/pbv-public/events/compare/v0.0.4...v0.0.5?expand=1)
+> * Version Checksums: Functional=21967e5231867c9ce2e91905435a3ed6 Full=01233c3bdeb05cbddf127ca7d5df65cc
+
+* `Moment.players` (type = `Player Snapshot`) now contains information about
+  each player at a given moment including _both_ their position (previously in
+  `Moment.player_positions`) and their kitchen change events (previously in
+  `Moment.kitchen_changes`). The motivations for this change include:
+  * Before, player position was required. But sometimes the player's position is not
+    known and thus we should omit it. This should only happen in rare cases like if the
+    player runs out of the video frame (e.g., to fetch a lost ball).
+  * The Map being used to store kitchen_changes was a little awkward because its keys
+    had to be strings (JSON object keys must be strings) but player IDs are ints. That
+    awkwardness goes away now that we have an array of players.
+  * If we add more per-moment player stats in the future, they'll naturally be added as
+    additional keys in `Player Snapshot`.
+* `Shot.ball.height_over_net` is now optional. It is omitted if the ball never _reaches_
+   the net after being hit (e.g., it goes backwards or off to the side).
+* `resulting_ball_movement.angles` has a revised definition for yaw and pitch which is
+  more intuitive.
+  * Pitch defines the angle the ball is going up or down.
+  * Yaw defines the direction (forwards, backwards, to the side) the ball is going.
+* Documentation only changes:
+  * `height_over_net` and `crossed_net` documentation updated to explain that these
+    fields refer to the net plane (i.e., the plane at `y=0.5`).
+  * Fixed a bug in the schema viewer web app. It was showing the type's description even
+    if the property had a custom description. For example, `shot.player_id`'s description
+    should read "the player who hit the ball". Clicking on that property will take you to
+    the documentation for the `Player ID` type (which documents how we number players.)
+
+-------------------------------------
 ## [v0.0.4](https://github.com/pbv-public/events/releases/tag/v0.0.4) on 2024-Feb-03
 > * [Compare to Previous Version](https://github.com/pbv-public/events/compare/v0.0.3...v0.0.4?expand=1)
 > * Version Checksums: Functional=aaa28444947648beb849a54c058e483f Full=200725eda7c26f2fa62a6f47559168dc

@@ -21,14 +21,18 @@
           "additionalProperties": false,
           "properties": {
             "pitch": {
-              "$ref": "/types/angle",
-              "description": "The angle (in degrees) at which the ball was hit along the z plane (up/down).",
-              "title": "Angle"
+              "description": "The pitch angle, in degrees within a range of [-90, 90].\n\n- 0 degrees: straight shot (parallel to the ground)\n- 90 degrees: shot directly upwards (perpendicular to the ground)\n- -90 degrees: shot directly downwards (perpendicular to the ground)",
+              "maximum": 90,
+              "minimum": -90,
+              "title": "Pitch Angle",
+              "type": "number"
             },
             "yaw": {
-              "$ref": "/types/angle",
-              "description": "The angle (in degrees) at which the ball was hit in the xy plane (left/right).",
-              "title": "Angle"
+              "description": "The yaw angle, in degrees within a range of (-180, 180].\n\n- 0 degrees: shot towards the left sideline (parallel to player's own baseline)\n- 90 degrees: shot towards the net directly (perpendicular to player's own baseline)\n- 180 degrees: shot towards the right sideline (parallel to player's own baseline)\n- Negative values are the same, but in the opposite direction (backwards).",
+              "maximum": 180,
+              "minimum": -180,
+              "title": "Yaw Angle",
+              "type": "number"
             }
           },
           "required": [
@@ -38,7 +42,7 @@
           "type": "object"
         },
         "crossed_net": {
-          "description": "`true` if the ball crosses the net, else `false`.",
+          "description": "`true` if the ball crosses the net plane, else `false`. Note that this value will be `true` for ATPs (they cross the net plane without the ball necessarily ever going higher than the net).",
           "type": "boolean"
         },
         "direction": {
@@ -66,7 +70,7 @@
           "title": "Zone"
         },
         "height_over_net": {
-          "description": "Height the ball was over the net when it crossed.",
+          "description": "The height the ball in feet when it _reaches_ the plane of the net. This is omitted if the ball never reaches the net plane. A ball that reaches the net but does not go over will have this value set to the height of the ball when it reaches the net (usually this will be greater than 0 but lower than the net height). Similarly, a ball that grazes the net cord and topples over will have its height over the net as roughly the height of the net at that location.  Note that the plane of the net exists at `y = 22`.",
           "type": "number"
         },
         "max_height": {
@@ -84,7 +88,6 @@
         "distance",
         "speed",
         "max_height",
-        "height_over_net",
         "direction",
         "crossed_net"
       ],

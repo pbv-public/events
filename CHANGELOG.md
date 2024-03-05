@@ -1,5 +1,14 @@
 # Events Schema Changelog
 
+## [v0.0.6](https://github.com/pbv-public/events/releases/tag/v0.0.6) on 2024-Mar-05
+> * [Compare to Previous Version](https://github.com/pbv-public/events/compare/v0.0.5...v0.0.6?expand=1)
+> * Version Checksums: Functional=1d8357a0445c4f28b2a2c53c97b4d244 Full=036ceee0daec12aafc9f802437c75ac7
+
+- renamed moments -> ball -> shot -> `type` to `trajectory_type`
+- valid trajectory types are one of smash | lob | dink | drive | drop
+- a `trajectory_type` is omitted if unknown
+
+-------------------------------------
 ## [v0.0.5](https://github.com/pbv-public/events/releases/tag/v0.0.5) on 2024-Feb-15
 > * [Compare to Previous Version](https://github.com/pbv-public/events/compare/v0.0.4...v0.0.5?expand=1)
 > * Version Checksums: Functional=21967e5231867c9ce2e91905435a3ed6 Full=01233c3bdeb05cbddf127ca7d5df65cc

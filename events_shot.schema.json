@@ -99,11 +99,14 @@
       "description": "where the ball was hit from",
       "title": "Zone"
     },
-    "type": {
+    "trajectory_type": {
+      "description": "- smash: an overhead or similar shot where the ball goes from high to low (no upward motion)\n- lob: a shot with a relatively high peak\n- dink: a shot that would land in or near the kitchen and which was hit from near the kitchen\n- drop: a shot that would land in or near the kitchen and was hit from the transition zone or deeper\n- drive: a shot that would land deep if not hit by an opponent (and doesn't fall into an earlier categorization)\n\nOmitted if we can't determine a type based on the ball's trajectory.",
       "enum": [
+        "smash",
+        "lob",
+        "dink",
         "drop",
-        "drive",
-        "lob"
+        "drive"
       ],
       "type": "string"
     }

@@ -1,5 +1,12 @@
 # Events Schema Changelog
 
+## [v0.0.7](https://github.com/pbv-public/events/releases/tag/v0.0.7) on 2024-Mar-23
+> * [Compare to Previous Version](https://github.com/pbv-public/events/compare/v0.0.6...v0.0.7?expand=1)
+> * Version Checksums: Functional=ca771df395f15864f686108766f6825e Full=8bb3f56c2457605c82e20b08db8ba48a
+
+- the `version` field is now a string matching x.x.x, where x represents one or more digits
+
+-------------------------------------
 ## [v0.0.6](https://github.com/pbv-public/events/releases/tag/v0.0.6) on 2024-Mar-05
 > * [Compare to Previous Version](https://github.com/pbv-public/events/compare/v0.0.5...v0.0.6?expand=1)
 > * Version Checksums: Functional=1d8357a0445c4f28b2a2c53c97b4d244 Full=036ceee0daec12aafc9f802437c75ac7
